@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>OpenSocial JumpStart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Le styles -->
+<link href="css/opensocial-bootstrap.css" rel="stylesheet">
+
+<script
+  src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+	<link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"/>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+<!-- Facebook -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<!-- navbar -->
+	<div class="navbar">
+  <div class="navbar-inner">
+
+			<div class="container">
+				
+				<a class="brand" href="#">OpenSocial JumpStart</a>
+				
+				<ul class="nav">
+          <li><a href="#"><i class="icon-home icon-white"></i> Home</a></li>
+<!--           <li><a href="#eeconfiguration"><i class="icon-wrench icon-white"></i> Configuration</a></li>  -->
+          <li class="dropdown"> <!-- apps dropdown -->
+           <a class="dropdown-toggle" href="apps.html" 
+            data-toggle="dropdown"><i class="icon-list-alt icon-white"></i> Apps <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="apps.html"><strong>Home</strong></a></li>
+              <li class="divider"></li>
+              <li><a href="apps.html#helloWorld"><strong>Hello World</strong></a></li>
+              <li><a href="apps.html#embeddedExperiences"><strong>Embedded Experiences</strong></a></li>
+            </ul>
+          </li><!-- /apps dropdown -->
+					<li><a href="activitystream.html"><i class="icon-inbox icon-white"></i> Activity Streams</a></li>
+
+					
+				</ul>
+			</div>
+
+  </div>
+	</div>
+<!-- /navbar -->
+
+
+		<div class="container">
+			<div class="content">
+
+				<div class="hero-unit">
+					<h1>OpenSocial
+					  <small>The web is better when it's social.</small>
+					</h1>
+	
+					<p>
+						OpenSocial is the open standard for building Applications using
+						only HTML, CSS, and JavaScript that can be run numerous of Open
+						Source and Commercial platforms. OpenSocial incorporates related
+						social web standards like <a href="http://activitystrea.ms/">Activity
+							Streams</a>, <a href="http://oauth.net/">OAuth</a>, and others.
+					</p>
+					<p>Explore and learn how it all fits together.</p>   
+					
+        
+				</div> <!-- /hero -->
+          <div style="text-align: center;"> <!-- Download section -->
+<!--             <h2>Download it!</h2> -->
+            
+            <div style="display: inline-block; padding: 10px;">
+              <a class="btn btn-large" style="display: inline-block;"
+                target="_blank"
+                href="http://rave.apache.org/downloads.html"><strong>Download
+                  Apache Rave &#187;</strong>
+              </a>
+              <em style="display: block;">
+              Fully functional OpenSocial container
+              </em>
+            </div>
+
+
+
+            <div style="display: inline-block; padding: 10px;">
+              <a class="btn btn-large" style="display: inline-block;"
+                target="_blank"
+                href="http://shindig.apache.org/download/index.html"><strong>Download
+                  Apache Shindig &#187;</strong>
+              </a>
+            
+            <em style="display: block;">
+            OpenSocial's Reference Implementation</em>
+          </div>
+          </div> <!-- / Download section -->
+
+<div class="row">
+          <div class="span6">
+            <h2>Learn about it!</h2>
+            <p><span class="label label-important">Newbies!</span> Explore the library of OpenSocial tutorials and references at the
+              <a
+                target="_blank"
+                href="http://docs.opensocial.org/display/OSREF/Home">OpenSocial
+                  References</a> wiki.
+            </p>
+            <p>Read the specifications and weigh in on proposals for the
+              latest version of OpenSocial at the
+              <a
+                target="_blank"
+                href="http://docs.opensocial.org/display/OSD/Specs">OpenSocial
+                  Specifications</a> wiki.
+            </p>
+          </div>
+
+					<div class="span6">
+          <h2>Get Involved!</h2>
+
+					<div class="row">
+						<div class="span">
+							<p>
+								<a href="http://docs.opensocial.org/display/OSF/Home"
+									target="_blank">Join the OpenSocial Foundation</a> and
+								participate in discussions on the <a
+									href="http://groups.google.com/group/opensocial-and-gadgets-spec/topics">Specification
+									discussion list</a>.
+							</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span">
+							<a href="https://twitter.com/opensocial"
+								class="twitter-follow-button" data-show-count="false"
+								data-size="large">Follow @opensocial</a>
+						</div>
+						<div class="span">
+							<a href="https://twitter.com/share" class="twitter-share-button"
+								data-text="I'm jumping headfirst into #OpenSocial"
+								data-via="opensocial" data-size="large"
+								data-related="opensocial">Tweet</a>
+						</div>
+						<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+						<div class="span" style="height: 300px;">
+							<div class="fb-like-box"
+								data-href="http://www.facebook.com/pages/OpenSocial/104087289690470"
+								data-width="292" data-height="300" data-show-faces="true"
+								data-stream="false" data-header="false"></div>
+								
+						</div>
+					</div>
+				</div>
+</div>
+
+	</div><!-- /content -->
+ 
+		</div>
+		
+		<!-- /container -->
+<!-- 	</div> -->
+</body>
+</html>

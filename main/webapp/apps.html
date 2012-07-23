@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Apps - OpenSocial JumpStart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Le styles -->
+<link href="css/opensocial-bootstrap.css" rel="stylesheet">
+
+<script
+  src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script
+  src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"/>
+<script type="text/javascript"
+  src="/gadgets/js/core:oauthpopup:container:rpc:open-views:views:actions.js?c=1&debug=1&container=default"></script>
+<script type="text/javascript" src="js/jumpstart-container.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+<!-- Facebook -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<!-- navbar -->
+  <div class="navbar">
+  <div class="navbar-inner">
+
+      <div class="container">
+        
+        <a class="brand" href="index.html">OpenSocial JumpStart</a>
+        
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Home</a></li>
+<!--           <li><a href="#eeconfiguration"><i class="icon-wrench icon-white"></i> Configuration</a></li>  -->
+          <li class="dropdown"> <!-- apps dropdown -->
+           <a class="dropdown-toggle" href="#"
+            data-toggle="dropdown"><i class="icon-list-alt icon-white"></i> Apps <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="#"><strong>Home</strong></a></li>
+              <li class="divider"></li>
+              <li><a href="#helloWorld"><strong>Hello World</strong></a></li>
+              <li><a href="#embeddedExperiences"><strong>Embedded Experiences</strong></a></li>
+            </ul>
+          </li><!-- /apps dropdown -->
+          <li><a href="activitystream.html"><i class="icon-inbox icon-white"></i> Activity Streams</a></li>
+
+          
+        </ul>
+      </div>
+
+  </div>
+  </div>
+<!-- /navbar -->
+
+
+    <div class="container">
+      <div class="content">
+
+
+<div class="row">
+<div class="span">
+<h1>OpenSocial Apps</h1>
+<p>Here we will learn how to build OpenSocial Apps ranging from simple examples to Embedded Experiences that
+can be used to embed contextual OpenSocial Apps into existing content.</p>
+</div>
+</div>
+
+<div class="row">
+<a id="helloWorld"></a>
+<h2>Hello World App</h2>
+	<div class="span">
+		 <h3>Introduction to the Gadget XML</h3>
+		 <p>The root of any OpenSocial App is the Gadget XML file.</p>
+		 <h4>HelloWorld.xml</h4>
+<pre>
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;Module&gt;
+  &lt;ModulePrefs title=&quot;Hello World!&quot;&gt;
+    &lt;Require feature=&quot;opensocial-0.8&quot; /&gt;
+  &lt;/ModulePrefs&gt;
+  &lt;Content type=&quot;html&quot;&gt;
+    &lt;![CDATA[
+      Hello, OpenSocial Gadget world!
+    ]]&gt;
+  &lt;/Content&gt;
+&lt;/Module&gt;
+</pre>
+	</div>
+	<div class="span">
+	<h3>Rendered App</h3>
+	<p>TODO: render example app</p>
+	</div>
+</div>
+
+<div class="row">
+<a id="embeddedExperiences"></a>
+<h2>Embedded Experiences</h2>
+  <div class="span">
+  
+  <p>TODO</p>
+  </div>
+</div>
+  </div><!-- /content -->
+ 
+    </div> <!-- /container -->
+
+</body>
+</html>

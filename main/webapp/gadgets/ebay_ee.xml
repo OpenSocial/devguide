@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module specificationVersion="2.0">
+  <ModulePrefs title="eBay EE">
+    <Require feature="dynamic-height"/>
+    <Require feature="dynamic-width"/>
+    <Require feature="embedded-experiences"></Require>
+    <Require feature="osapi"></Require>
+    <Require feature="open-views"></Require>
+  </ModulePrefs>
+
+<Content type="html" view="embedded, default" >
+<![CDATA[
+<head>
+<link href="http://current.bootstrapcdn.com/bootstrap-v204/css/bootstrap-combined.min.css" rel="stylesheet">
+<meta name="viewport" content="user-scalable=no">
+<style type="text/css">
+  .thumbnail {
+    max-height: 200px;
+    margin: 10px 10px 0px 0px;
+  }
+</style>
+<script
+  src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="ebay_ee.js">
+</script> 
+
+</head>
+
+<div id="ee_content" class="container-fluid">
+<div id="loading">
+<h3>Loading...</h3>
+</div>
+<div id="success" class="hide">
+  <h2><span id="productName"></span></h2>
+  <div class="row">
+    <div class="span">
+      <p><img id="productImage" src=""/></p>
+    </div>
+    <div class="span">
+      <h4>Latest eBay Auctions!</h4>
+      <ul id="auctions">
+      </ul>
+    </div>
+  </div>
+</div>
+<div id="fail" style="margin-top: 20px;" class="alert-message alert-error hide">
+  <p><strong>Could not locate resource!</strong></p>
+  <p>This resource either does not exist or is unavailable at this time.</p>
+  <p><small class="failURI"></small></p>
+</div>
+
+
+</div>
+
+]]>
+  </Content>
+</Module>

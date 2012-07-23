@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module specificationVersion="2.0">
+  <ModulePrefs title="Embedly oEmbed EE">
+    <Require feature="dynamic-height"/>
+    <Require feature="dynamic-width"/>
+    <Require feature="embedded-experiences"></Require>
+    <Require feature="osapi"></Require>
+  </ModulePrefs>
+
+<Content type="html" view="embedded, default" >
+<![CDATA[
+<head>
+<meta name="viewport" content="user-scalable=no">
+<link href="http://current.bootstrapcdn.com/bootstrap-v204/css/bootstrap-combined.min.css" rel="stylesheet">
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://scripts.embed.ly/jquery.embedly-2.1.7.js"></script>
+<script type="text/javascript" src="embedly_ee.js"></script> 
+
+</head>
+
+<div id="ee_content" class="container-fluid">
+<div id="loading">
+<h3>Loading...</h3>
+</div>
+<div id="success" class="hide">
+  <h2><span id="name"></span> <small id="provider_name"></small></h2>
+  <p id="description">
+  </p>
+  
+  <p id="oembed_html">
+  </p>
+    
+
+</div>
+<div id="fail" style="margin-top: 20px;" class="alert-message error hide">
+  <p><strong>Could not locate resource!</strong></p>
+  <p>This resource either does not exist or is unavailable at this time.</p>
+  <p><small class="failURI"></small></p>
+</div>
+
+
+</div>
+
+]]>
+  </Content>
+</Module>

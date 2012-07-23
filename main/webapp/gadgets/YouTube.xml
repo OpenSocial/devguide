@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+-->
+<Module>
+  <ModulePrefs title="YouTube Gadget" width="650" height="400" scrolling="true">
+  	<Require feature="dynamic-height"/>
+  	<Require feature="embedded-experiences"/>
+  	<Require feature="tabs"/>
+  </ModulePrefs>
+  <Content type="html" view="embedded,default">
+      <![CDATA[
+      	<style type="text/css">
+      		.youTubeWrapper{
+      			font: 75%/1.5 Arial,Helvetica,sans-serif;
+            margin: 10px 10px 10px 10px;
+      		}
+      	</style>
+      	
+      	<div class="youTubeWrapper">
+			<div id="playerWrapper">
+				<div id="author"></div>
+				<div id="player"></div>
+			</div>
+		</div> 
+		
+	
+		<script type="text/javascript">
+
+			/**
+			 * Utility function to make sure the GData URLs return the data
+			 * in JSON
+			 * @param url the URL to add the json param to
+			 */
+			function addJsonParam(url){
+    			if(url.indexOf("?", url) != -1){
+    				url = url + "&";
+    			}
+    			else{
+    				url = url + "?";
+    			}
+    			return url + "alt=json";
+    		};
+    		
+
+	
+			/**
+			 * Callback function to be called when the embedded experience context information
+			 * has been retrieved for this gadget.
+			 * @param url the YouTube video url
+			 */
+    		function fetchData(url) {
+            var parts = url.split('?');
+            var id = "";
+            parts = parts[1].split('&');
+            for(var i=0; i < parts.length; i++){
+              if(parts[i].indexOf('v=') != -1){
+                id = parts[i].substring(2);
+              }
+            }
+      			var params = {};
+      			var url = "http://gdata.youtube.com/feeds/api/videos/" + id + "?v=2&alt=json";
+      			params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      			params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+
+      			gadgets.io.makeRequest(url, function (response) {
+      				if(response.errors.length == 0){
+        				document.getElementById("player").innerHTML = '<object width=480" height="285"><param name="movie" value="' + response.data.entry.content.src + '&wmode=opaque&fs=1&feature=oembed"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="' + response.data.entry.content.src + '&wmode=opaque&fs=1&feature=oembed" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="480" height="285"></embed></object>';
+        			}
+        			else{
+        				alert(response.text);
+        			}       
+        
+      			}, params, 0);
+    		};
+
+    		/*
+     		 * Once the gadget loads register a listener for the EE context information.
+     		 * The context informaiton should can the ID for the YouTube video we want
+     		 * to show.
+     		 */
+    		gadgets.util.registerOnLoadHandler(function(){
+          gadgets.window.adjustHeight(400);
+    			opensocial.data.getDataContext().registerListener('org.opensocial.ee.context', function(key){
+     				fetchData(opensocial.data.getDataContext().getDataSet(key).url);
+     			});
+    		});
+  		</script>
+        ]]>
+  </Content>
+</Module>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module specificationVersion="2.0">
+  <ModulePrefs title="Netflix EE">
+    <Require feature="dynamic-height"/>
+    <Require feature="dynamic-width"/>
+    <Require feature="embedded-experiences"></Require>
+    <Require feature="osapi"></Require>
+    <Require feature="open-views"></Require>
+  </ModulePrefs>
+
+<Content type="html" view="embedded, default" >
+<![CDATA[
+<head>
+<meta name="viewport" content="user-scalable=no">
+<link href="http://current.bootstrapcdn.com/bootstrap-v204/css/bootstrap-combined.min.css" rel="stylesheet">
+<style type="text/css">
+
+  .tag {
+    padding-right: 15px;
+    font-weight: bold;
+  }
+  
+  .userName { 
+    font-weight: bold;
+  }
+  
+</style>
+<script
+  src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="netflix_ee.js">
+</script> 
+
+</head>
+
+<div id="ee_content" class="container-fluid">
+<div id="loading">
+<h3>Loading...</h3>
+</div>
+<div id="success" class="hide">
+  <h2><img id="boxArt" src="" style="margin: 10px 10px 0px 0px;"/><span id="movieName"></span> <small>(<span id="yearReleased"></span>)</small> </h2>
+  <h4>Plot Synopsis</h4>
+  <p id="synopsis">
+  </p>
+  <h4 id="genresSection" class="row hide">
+    <span class="span" style="padding-right: 15px;">Genres: </span><small id="genresSpan"></small>
+  </h4>
+
+  <h4 id="actionsSpan" class="row hide">
+    <span class="span" style="padding-top: 2px">Watch it:</span> 
+  </h4>
+</div>
+<div id="odataFail" style="margin-top: 20px;" class="alert alert-error hide">
+  <p><strong>Could not locate resource!</strong></p>
+  <p>This resource either does not exist or is unavailable at this time.</p>
+  <p><small class="odataURI"></small></p>
+</div>
+
+<div id="odataMovieMissing" style="margin-top: 20px;" class="alert hide">
+  <p><strong>This movie isn't in the Netflix OData Catalog!</strong></p>
+  <p>Sorry, no additional details for this film are available at this time.</p>
+  <p><small class="odataURI"></small></p>
+</div>
+
+</div>
+
+]]>
+  </Content>
+</Module>

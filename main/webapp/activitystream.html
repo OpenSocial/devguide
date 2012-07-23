@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Activity Streams - OpenSocial JumpStart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+<!-- Le styles -->
+<link href="css/opensocial-bootstrap.css" rel="stylesheet">
+<link href="css/activitystream.css" rel="stylesheet"/>
+
+<script
+  src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script
+  src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
+  <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"/>
+<script type="text/javascript"
+  src="/gadgets/js/core:oauthpopup:container:rpc:open-views:views:actions.js?c=1&debug=1&container=default"></script>
+<script type="text/javascript" src="js/jumpstart-container.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+<!-- Facebook -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+<!-- navbar -->
+  <div class="navbar">
+  <div class="navbar-inner">
+
+      <div class="container">
+        
+        <a class="brand" href="index.html">OpenSocial JumpStart</a>
+        
+        <ul class="nav">
+          <li><a href="index.html"><i class="icon-home icon-white"></i> Home</a></li>
+<!--           <li><a href="#eeconfiguration"><i class="icon-wrench icon-white"></i> Configuration</a></li>  -->
+          <li class="dropdown"> <!-- apps dropdown -->
+           <a class="dropdown-toggle" href="apps.html"
+            data-toggle="dropdown"><i class="icon-list-alt icon-white"></i> Apps <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <li><a href="apps.html"><strong>Home</strong></a></li>
+              <li class="divider"></li>
+              <li><a href="apps.html#helloWorld"><strong>Hello World</strong></a></li>
+              <li><a href="apps.html#embeddedExperiences"><strong>Embedded Experiences</strong></a></li>
+            </ul>
+          </li><!-- /apps dropdown -->
+          <li><a href="#"><i class="icon-inbox icon-white"></i> Activity Streams</a></li>
+
+          
+        </ul>
+      </div>
+
+  </div>
+  </div>
+<!-- /navbar -->
+
+
+    <div class="container">
+      <div class="content">
+
+<!-- Begin ActivityStream -->
+
+<BR>
+<div id="activityStream">
+        <div class="row">
+
+<div class="span4">
+
+          <h2>OpenSocial Activity Stream</h2><h2><small>The new inbox</small></h2>
+          <p>OpenSocial defines JavaScript and web services APIs for accessing user and application specific <a href="http://activitystrea.ms/">Activity Streams</a>.  OpenSocial 2.0 built on Activity Streams by introducing the ability to embed OpenSocial Applications, and other outside content, into activity entries using something we call 'Embedded Experiences'.</p>
+          <p><a href="http://docs.opensocial.org/display/OSREF/Embedded+Experiences+Tutorial" target="_blank" class="btn btn-info">Creating Embedded Experiences &#187;</a></p>
+          
+</div>
+
+
+
+          <div class="span8">
+
+            <a id="eeconfiguration"></a>
+            
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#twitterExample" data-toggle="tab"><strong>Example Twitter Activity Stream</strong></a>
+              </li>
+              <li><a href="#activityStreamService" data-toggle="tab"><strong>Custom
+                  Activity Stream</strong></a>
+              </li>
+            </ul>
+            <div class="tab-content">
+            
+              <div class="tab-pane" id="activityStreamService">
+                <h3>TODO</h3>
+              </div>
+              
+              <div class="tab-pane active" id="twitterExample"> <!--  Twitter example config -->
+
+              <div class="row">
+                <div class="span4">
+                  <h4>Hashtag EE Configuration</h4>
+                  <pre id="ee_hashtags"></pre>
+                </div>
+                <div class="span4">
+                  <h4>URL Matching EE Configuration</h4>
+                  <pre id="ee_urls"></pre>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="span">
+                  <form class="form-inline" style="padding-left: 1px;">
+
+                    <div class="input-prepend">
+                      <span class="add-on">@</span><input class="input-medium" id="screenName"
+                        type="text" name="screenName" value="joeschmoe_dev" />
+                    </div>
+
+                    <p class="help-block">Enter a Twitter username</p>
+
+
+                  </form>
+                </div>
+                <div class="span">
+                  <a class="btn btn-primary btn-large" id="activityStreamRefresh"
+                    onclick="fetchAS(); return null;" target="_blank"> <strong>Refresh Stream</strong> </a>
+                </div>
+              </div>
+
+            </div> <!-- / Twitter example config -->
+            </div>
+
+          </div>
+        </div>
+
+
+
+
+          <div id="liveStreams" class="row">
+            <div id="streamDiv" class="span12">
+              <div class="inner stream-style" id="stream"></div>
+            </div>
+
+          </div>
+          
+  
+      </div>   <!-- End ActivityStream  -->
+      
+
+      <div id="containerDialog" class="hide" title="Container Dialog invoked from Gadget">
+      </div>
+  </div><!-- /content -->
+ 
+    </div>
+    
+    <!-- /container -->
+<!--  </div> -->
+</body>
+</html>
