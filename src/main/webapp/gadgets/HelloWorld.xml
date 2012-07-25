@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Hello World!">
+    <Require feature="osapi" />
+  </ModulePrefs>
+  <Content type="html" view="default">
+    <![CDATA[
+      Hello, OpenSocial Gadget world!
+    ]]>
+  </Content>
+</Module>

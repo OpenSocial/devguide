@@ -18,23 +18,14 @@
   src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
   <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"/>
 <script type="text/javascript"
-  src="/gadgets/js/core:oauthpopup:container:rpc:open-views:views:actions.js?c=1&debug=1&container=default"></script>
-<script type="text/javascript" src="js/jumpstart-container.js"></script>
+  src="/gadgets/js/core:container:rpc:open-views:views.js?c=1&debug=1&container=default"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/app-container.js"></script>
 
 
 </head>
 
 <body>
-<!-- Facebook -->
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
 
 
 <!-- navbar -->
@@ -81,20 +72,22 @@ can be used to embed contextual OpenSocial Apps into existing content.</p>
 </div>
 </div>
 
-<div class="row">
+
 <a id="helloWorld"></a>
 <h2>Hello World App</h2>
+<h3>Introduction to the Gadget XML</h3>
+<p>The root of any OpenSocial App is the Gadget XML file.  
+It defines all the metadata needed for an OpenSocial container to render a gadget.</p>
+<div class="row">
 	<div class="span">
-		 <h3>Introduction to the Gadget XML</h3>
-		 <p>The root of any OpenSocial App is the Gadget XML file.</p>
 		 <h4>HelloWorld.xml</h4>
 <pre>
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;Module&gt;
   &lt;ModulePrefs title=&quot;Hello World!&quot;&gt;
-    &lt;Require feature=&quot;opensocial-0.8&quot; /&gt;
+    &lt;Require feature=&quot;osapi&quot; /&gt;
   &lt;/ModulePrefs&gt;
-  &lt;Content type=&quot;html&quot;&gt;
+  &lt;Content type=&quot;html&quot; view=&quot;default&quot;&gt;
     &lt;![CDATA[
       Hello, OpenSocial Gadget world!
     ]]&gt;
@@ -103,8 +96,9 @@ can be used to embed contextual OpenSocial Apps into existing content.</p>
 </pre>
 	</div>
 	<div class="span">
-	<h3>Rendered App</h3>
-	<p>TODO: render example app</p>
+	<h4>HelloWorld App</h4>
+	<div id="loadingHelloWorld"><p>Loading...</p></div>
+	<div class="hide" id="hello-world-gadget"></div>
 	</div>
 </div>
 
