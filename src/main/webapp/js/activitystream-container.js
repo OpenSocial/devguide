@@ -44,7 +44,7 @@ function fetchAS(){
   }
 
   $.get('rest/timeline?screen_name='+name, function(dataResponse){
-    log(dataResponse);
+    
   }).success(function(dataResponse){
     renderAS(dataResponse);
   }).error(function(dataResponse){
@@ -447,7 +447,7 @@ function changeToken(){
   var userId = 'john.doe'+new Date().getTime();
   shindig.auth.updateSecurityToken(generateSecureToken(userId,userId));
   var st = shindig.auth.getSecurityToken();
-  log(st);
+  
 }
 
 function generateSecureToken(ownerId, viewerId) {

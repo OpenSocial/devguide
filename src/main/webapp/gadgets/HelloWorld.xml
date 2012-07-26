@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
+  <!-- ModulePrefs is where we define the gadget metadata       -->
+  <!-- needed by the container in order to properly render the  -->
+  <!-- gadget.  For example, this gadget requires the 'osapi'   -->
+  <!-- javascript feature.                                      -->
   <ModulePrefs title="Hello World!">
     <Require feature="osapi" />
   </ModulePrefs>
+  <!-- Content sections are where you put your HTML. -->
   <Content type="html" view="default">
     <![CDATA[
       Hello, OpenSocial Gadget world!

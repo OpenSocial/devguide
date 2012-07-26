@@ -38,15 +38,14 @@
         
         <ul class="nav">
           <li><a href="index.html"><i class="icon-home icon-white"></i> Home</a></li>
-<!--           <li><a href="#eeconfiguration"><i class="icon-wrench icon-white"></i> Configuration</a></li>  -->
           <li class="dropdown"> <!-- apps dropdown -->
-           <a class="dropdown-toggle" href="#"
-            data-toggle="dropdown"><i class="icon-list-alt icon-white"></i> Apps <b class="caret"></b></a>
+           <a class="dropdown-toggle" href="apps.html" 
+            data-toggle="dropdown"><i class="icon-list-alt icon-white"></i> Building Apps <b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="#"><strong>Home</strong></a></li>
+              <li><a href="apps.html"><strong>Home</strong></a></li>
               <li class="divider"></li>
-              <li><a href="#helloWorld"><strong>Hello World</strong></a></li>
-              <li><a href="#embeddedExperiences"><strong>Embedded Experiences</strong></a></li>
+              <li><a href="apps.html#helloWorld"><strong>Hello World</strong></a></li>
+              <li><a target="_blank" href="http://eedemos.opensocial2.org/"><strong>Embedded Experiences</strong></a></li>
             </ul>
           </li><!-- /apps dropdown -->
           <li><a href="activitystream.html"><i class="icon-inbox icon-white"></i> Activity Streams</a></li>
@@ -79,37 +78,31 @@ can be used to embed contextual OpenSocial Apps into existing content.</p>
 <p>The root of any OpenSocial App is the Gadget XML file.  
 It defines all the metadata needed for an OpenSocial container to render a gadget.</p>
 <div class="row">
-	<div class="span">
+	<div class="span6">
 		 <h4>HelloWorld.xml</h4>
-<pre>
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
-&lt;Module&gt;
-  &lt;ModulePrefs title=&quot;Hello World!&quot;&gt;
-    &lt;Require feature=&quot;osapi&quot; /&gt;
-  &lt;/ModulePrefs&gt;
-  &lt;Content type=&quot;html&quot; view=&quot;default&quot;&gt;
-    &lt;![CDATA[
-      Hello, OpenSocial Gadget world!
-    ]]&gt;
-  &lt;/Content&gt;
-&lt;/Module&gt;
-</pre>
+	<div id="loadingHelloWorldXML"><p>Loading...</p></div>
+  <div class="hide" id="hello-world-xml">
+<pre class="pre-scrollable"></pre>  
+  </div>
 	</div>
-	<div class="span">
+	<div class="span6">
 	<h4>HelloWorld App</h4>
-	<div id="loadingHelloWorld"><p>Loading...</p></div>
-	<div class="hide" id="hello-world-gadget"></div>
+	<div id="loadingHelloWorldGadget"><p>Loading...</p></div>
+	<div class="hide well" id="hello-world-gadget">
+	<strong></strong>
+	<div id="hello-world-gadget-site"></div>
+	</div>
 	</div>
 </div>
 
-<div class="row">
-<a id="embeddedExperiences"></a>
-<h2>Embedded Experiences</h2>
-  <div class="span">
+<!-- <div class="row"> -->
+<!-- <a id="embeddedExperiences"></a> -->
+<!-- <h2>Embedded Experiences</h2> -->
+<!--   <div class="span"> -->
   
-  <p>TODO</p>
-  </div>
-</div>
+<!--   <p>TODO</p> -->
+<!--   </div> -->
+<!-- </div> -->
   </div><!-- /content -->
  
     </div> <!-- /container -->
