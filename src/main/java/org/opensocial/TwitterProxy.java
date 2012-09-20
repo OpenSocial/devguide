@@ -14,28 +14,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 
  */
-import org.apache.abdera2.activities.model.ASBase;
-import org.apache.abdera2.activities.model.ASBase.ASBuilder;
-import org.apache.abdera2.activities.model.ASObject;
-import org.apache.abdera2.activities.model.Activity;
-import org.apache.abdera2.activities.model.Activity.ActivityBuilder;
-import org.apache.abdera2.activities.model.MediaLink;
-import org.apache.abdera2.activities.model.Verb;
-import org.apache.abdera2.activities.model.objects.EmbeddedExperience;
-import org.apache.abdera2.activities.model.objects.PersonObject;
-import org.apache.abdera2.common.iri.IRI;
-import org.apache.wink.common.annotations.Workspace;
-import org.joda.time.DateTime;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import twitter4j.HashtagEntity;
-import twitter4j.ResponseList;
-import twitter4j.Status;
-import twitter4j.Twitter;
-import twitter4j.TwitterFactory;
-import twitter4j.URLEntity;
-import twitter4j.conf.ConfigurationBuilder;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.StringWriter;
+import java.util.Iterator;
+import java.util.Properties;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -46,13 +29,22 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.StringWriter;
-import java.net.URL;
-import java.util.Iterator;
-import java.util.Properties;
-import java.util.Set;
+import org.apache.abdera2.activities.model.ASObject;
+import org.apache.abdera2.activities.model.Activity;
+import org.apache.abdera2.activities.model.Activity.ActivityBuilder;
+import org.apache.abdera2.activities.model.MediaLink;
+import org.apache.abdera2.activities.model.Verb;
+import org.apache.abdera2.activities.model.objects.PersonObject;
+import org.apache.wink.common.annotations.Workspace;
+import org.joda.time.DateTime;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import twitter4j.ResponseList;
+import twitter4j.Status;
+import twitter4j.Twitter;
+import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
 
 /**
  * Proxy that reads a Twitter user's timeline (or from the public timeline if no user given) and 
@@ -78,9 +70,6 @@ public class TwitterProxy {
   
   protected TwitterFactory tf = null;
   protected Twitter twitter = null;
-  
-  protected Properties hashtags = null;
-  protected Properties urls = null;
   
   public TwitterProxy(){
     ConfigurationBuilder cb = new ConfigurationBuilder();
@@ -115,25 +104,6 @@ public class TwitterProxy {
   @Produces(MediaType.APPLICATION_JSON)
   public Object getTweets(@QueryParam("screen_name") String screenName){
     
-    //Reload EE configuration on each request so that it can be dynamically updated
-    Properties props = new Properties();
-    try {
-      InputStream is = TwitterProxy.class.getClassLoader().getResourceAsStream("hashtags.properties");
-      props.load(is);
-      hashtags = props;
-    }catch (IOException ex){
-      System.out.println("Could not open hashtags.properties, skipping.");
-    }
-    
-    props = new Properties();
-    try {
-      InputStream is = TwitterProxy.class.getClassLoader().getResourceAsStream("urls.properties");
-      props.load(is);
-      urls = props;
-    }catch (IOException ex){
-      System.out.println("Could not open urls.properties, skipping.");
-    }
-    
     
     JSONArray resultArray = new JSONArray();
     ResponseList<Status> list = null;
@@ -159,23 +129,17 @@ public class TwitterProxy {
               PersonObject.makePerson(status.getUser().getScreenName())
                 .id(Long.toString(status.getUser().getId()))
                 .image(MediaLink.makeMediaLink(status.getUser().getProfileImageURL().toExternalForm())).get());
-        Set<String> tags = hashtags.stringPropertyNames();
-        Iterator<String> tagIter = tags.iterator();
+
         boolean eeAdded = false;
-        while(!eeAdded && tagIter.hasNext()){
-          String tag = tagIter.next();
-          eeAdded = addHashtagEE(status, activityBuilder, tag, hashtags.getProperty(tag));
-        }
+        eeAdded = EmbeddedExperiences.addHashtagEE(uriInfo, status, activityBuilder);
         
-        Set<String> urlset = urls.stringPropertyNames();
-        Iterator<String> urlIter = urlset.iterator();
-        while(!eeAdded && urlIter.hasNext()){
-          String url = urlIter.next();
-          eeAdded = addUrlMatchedEE(status, activityBuilder, url, urls.getProperty(url));
+        
+        if(!eeAdded){
+          eeAdded = EmbeddedExperiences.addUrlMatchedEE(uriInfo, status, activityBuilder);
         }
         
         if(!eeAdded){
-          eeAdded = addUrlStyleEE(status, activityBuilder);
+          eeAdded = EmbeddedExperiences.addUrlStyleEE(status, activityBuilder);
         }
         
         activityBuilder.content(status.getText());
@@ -193,82 +157,10 @@ public class TwitterProxy {
     }
   }
   
-  private boolean addHashtagEE(Status status, ActivityBuilder activityBuilder, String hashtag, String gadget) {
-    HashtagEntity[] hashtags = status.getHashtagEntities();
-    for (HashtagEntity hashtagEntity : hashtags) {
-      if(hashtagEntity.getText().toLowerCase().startsWith(hashtag.toLowerCase())){
-        ASBuilder builder = ASBase.make()
-        .set("hashtag",hashtagEntity.getText())
-        .set("text",status.getText());
-        URLEntity[] urls = status.getURLEntities();
-        if(urls.length > 0){ //Grab and set a URL if there is one
-          URLEntity entity = urls[0];
-          URL url = entity.getURL();
-          if(entity.getExpandedURL() != null){
-            url = entity.getExpandedURL();
-          }
-          builder.set("url",url);
-        }
-        if(!gadget.startsWith("http")){
-          gadget = "http://"+uriInfo.getBaseUri().getAuthority() + gadget;
-        }
-        activityBuilder.embeddedExperience(EmbeddedExperience.makeEmbeddedExperience()
-            .gadget(new IRI(gadget))
-            .context(builder.get())
-            .get());
-        return true;
-        
-      }
-    }
-    return false;
-  }
-  
-  private boolean addUrlMatchedEE(Status status, ActivityBuilder activityBuilder, String urlPattern, String gadget) {
 
-    URLEntity[] urls = status.getURLEntities();
-    for (URLEntity urlEntity : urls) {
-      URL expandedUrl = urlEntity.getExpandedURL();
-      if(expandedUrl == null){
-        expandedUrl = urlEntity.getURL();
-      }
-      if(expandedUrl == null){
-        continue;
-      }
-      String expanded = expandedUrl.toExternalForm();
-      
-      if(expanded.contains(urlPattern)){
-        if(!gadget.startsWith("http")){
-          gadget = "http://"+uriInfo.getBaseUri().getAuthority() + gadget;
-        }
-        activityBuilder.embeddedExperience(EmbeddedExperience.makeEmbeddedExperience()
-            .gadget(new IRI(gadget))
-            .context(ASBase.make()
-                .set("url",expanded)
-                .set("text",status.getText())
-                .get())
-            .get());
-        return true;
-      }
-    }
-      
-    
-    return false;
-  }
   
-  private boolean addUrlStyleEE(Status status, ActivityBuilder activityBuilder) {
-    URLEntity[] urls = status.getURLEntities();
-    if(urls.length > 0){
-      URLEntity entity = urls[0];
-      URL url = entity.getURL();
-      if(entity.getExpandedURL() != null){
-        url = entity.getExpandedURL();
-      }
-      activityBuilder.embeddedExperience(EmbeddedExperience.makeEmbeddedExperience()
-          .url(url.toExternalForm())
-          .get());
-      return true;
-    }
-    return false;
-  }
+
+  
+
 
 }
